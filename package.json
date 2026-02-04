@@ -5,13 +5,23 @@
   "main": "index.js",
   "scripts": {
     "test": "NODE_ENV=test mocha tests/*.test.js",
-    "start": "node index.js"
+    "start": "node index.js",
+    "dev": "NODE_ENV=development node index.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/StoneLoner/KAIDA---Tracker.git"
   },
-  "keywords": [],
+  "keywords": [
+    "affiliate",
+    "link-tracker",
+    "url-shortener",
+    "analytics",
+    "monitoring",
+    "link-shortening",
+    "conversion-tracking",
+    "click-tracking"
+  ],
   "author": "",
   "license": "ISC",
   "type": "commonjs",

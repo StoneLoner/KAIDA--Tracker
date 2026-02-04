@@ -10,6 +10,24 @@ const app = express();
 app.use(express.json());
 app.use(express.static('public'));
 
+// Health check endpoint for deployment platforms
+app.get('/health', (req, res) => {
+  try {
+    // Basic database check
+    db.prepare('SELECT 1').get();
+    res.status(200).json({ 
+      status: 'healthy',
+      timestamp: new Date().toISOString(),
+      version: '1.0.0'
+    });
+  } catch (err) {
+    res.status(503).json({ 
+      status: 'unhealthy',
+      error: 'Database connection failed'
+    });
+  }
+});
+
 // Postback for conversion tracking
 app.get('/api/postback/:slug', (req, res) => {
   const { slug } = req.params;
