@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: kaida-tracker
+    env: node
+    buildCommand: npm install
+    startCommand: node index.js
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3000
+      # Add your SMTP configuration as environment variables in Render dashboard
+      # SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, ALERT_EMAIL
+    
+databases:
+  # SQLite is used, stored in the file system
+  # For production, consider using Render's PostgreSQL or another persistent database
