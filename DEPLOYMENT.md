@@ -401,11 +401,38 @@ ALERT_EMAIL=admin@example.com
    ```
 
 2. **Use HTTPS** for all deployments
+
 3. **Set secure environment variables** (never commit `.env` files)
-4. **Enable rate limiting** to prevent abuse
+
+4. **Enable rate limiting** to prevent abuse:
+   - For production deployments, consider adding rate limiting middleware like `express-rate-limit`
+   - Example implementation:
+     ```bash
+     npm install express-rate-limit
+     ```
+     Then in your app.js:
+     ```javascript
+     const rateLimit = require('express-rate-limit');
+     
+     const limiter = rateLimit({
+       windowMs: 15 * 60 * 1000, // 15 minutes
+       max: 100 // limit each IP to 100 requests per windowMs
+     });
+     
+     app.use('/api/', limiter);
+     ```
+   - This is especially important for database access endpoints
+
 5. **Regular security audits** of your deployment
+
 6. **Use strong SMTP passwords** or app-specific passwords
+
 7. **Implement authentication** for sensitive endpoints (future enhancement)
+
+8. **Database access protection:**
+   - Consider adding authentication to the admin dashboard
+   - Use environment-based API keys for programmatic access
+   - Monitor for unusual access patterns
 
 ---
 
