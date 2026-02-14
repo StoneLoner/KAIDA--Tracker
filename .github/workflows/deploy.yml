@@ -1,0 +1,47 @@
+name: Deploy and Security Scan
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+# 👇 ADD THESE WORKFLOW PERMISSIONS
+permissions:
+  contents: read
+  security-events: write
+  actions: read
+  checks: write
+  pull-requests: write
+
+jobs:
+  security:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      security-events: write
+      
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        
+      - name: Run security scan
+        run: |
+          npm audit --production
+          npm outdated
+          
+      - name: Run tests
+        run: npm test
+        
+  deploy:
+    needs: security
+    runs-on: ubuntu-latest
+    # 👇 MINIMAL PERMISSIONS FOR DEPLOY
+    permissions:
+      contents: read
+      deployments: write
+      
+    steps:
+      - name: Deploy to Heroku
+        run: |
+          echo "Deployment step here"
