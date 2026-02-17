@@ -1,19 +1,25 @@
-# KAIDA Tracker
+# KAIDA - Affiliate Link Tracker
 
-An open-source affiliate link tracker with real-time analytics and automated alerts. Self-hosted, privacy-focused, and completely free.
+KAIDA is a comprehensive affiliate link tracking system that allows you to shorten, track, and monitor your affiliate links with auto-alerts and simple reports.
 
-## ✨ Features
+## Features
 
-- **Link Tracking** – Create shortened affiliate links with custom slugs
-- **Real-time Analytics** – Track clicks, unique visitors, referrers, geographic data
-- **Auto-alerts** – Get notified via Discord, Slack, or email when links hit thresholds
-- **Conversion Tracking** – Monitor sales and commissions
-- **REST API** – Integrate with your existing tools and workflows
-- **Privacy-first** – No third-party tracking, you own all data
+- **Link Shortening**: Create short, memorable URLs from long affiliate links
+- **Click Tracking**: Monitor clicks, conversions, and conversion rates
+- **Health Monitoring**: Automatic checking for broken/dead links
+- **Analytics Dashboard**: Visual reports and detailed analytics
+- **Conversion Tracking**: Record and track conversion values
+- **Tagging System**: Organize links with custom tags
+- **Real-time Alerts**: Get notified when links break
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
-- Node.js 18+ or Python 3.9+
-- PostgreSQL 14+
-- Redis (optional, for rate limiting)
+- Node.js 14+ and npm
+- MongoDB 4.4+
+
+### Backend Setup
+
+1. Navigate to the backend directory:
+```bash
+cd backend
