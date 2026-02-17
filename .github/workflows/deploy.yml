@@ -1,47 +1,16 @@
-name: Deploy and Security Scan
+# Deployment & Security Configuration
 
-on:
-  push:
-    branches: [ main, master ]
-  pull_request:
-    branches: [ main, master ]
+## GitHub Workflow Permissions
+The repository uses minimal required permissions:
+- `contents: read` - Checkout code
+- `security-events: write` - Upload security reports
+- `deployments: write` - Deploy to platforms
 
-# 👇 ADD THESE WORKFLOW PERMISSIONS
-permissions:
-  contents: read
-  security-events: write
-  actions: read
-  checks: write
-  pull-requests: write
+## Rate Limiting
+API endpoints are rate-limited:
+- General API: 100 requests/15 minutes per IP
+- Link creation: 50 requests/hour per IP
+- Alert endpoints: 10 requests/5 minutes per IP
 
-jobs:
-  security:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      security-events: write
-      
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-        
-      - name: Run security scan
-        run: |
-          npm audit --production
-          npm outdated
-          
-      - name: Run tests
-        run: npm test
-        
-  deploy:
-    needs: security
-    runs-on: ubuntu-latest
-    # 👇 MINIMAL PERMISSIONS FOR DEPLOY
-    permissions:
-      contents: read
-      deployments: write
-      
-    steps:
-      - name: Deploy to Heroku
-        run: |
-          echo "Deployment step here"
+### Configure Rate Limits
+Set environment variables:
